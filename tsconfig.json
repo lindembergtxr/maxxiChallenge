@@ -20,7 +20,12 @@
         "noUnusedParameters": true,
         "erasableSyntaxOnly": true,
         "noFallthroughCasesInSwitch": true,
-        "noUncheckedSideEffectImports": true
+        "noUncheckedSideEffectImports": true,
+        "paths": {
+            "@/*": ["./src/*"],
+            "@features/*": ["./src/features/*"],
+            "@i18n/*": ["./src/features/i18n/*"]
+        }
     },
     "include": ["src"]
 }
