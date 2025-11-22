@@ -7,7 +7,7 @@ export const todoList: Task[] = [
         description: 'Ir ao mercado e comprar frutas, legumes e café.',
         priority: 'medium',
         dueDate: '2025-12-02T10:00:00.000Z',
-        status: 'pending',
+        status: 'cancelled',
         location: { latitude: -23.55052, longitude: -46.633308 },
     },
     {
@@ -52,7 +52,7 @@ export const todoList: Task[] = [
         description: 'Organizar mesa, jogar papéis fora e passar pano.',
         priority: 'low',
         dueDate: null,
-        status: 'pending',
+        status: 'in_progress',
         location: { latitude: -34.603722, longitude: -58.381592 },
     },
     {
@@ -106,7 +106,7 @@ export const todoList: Task[] = [
         description: 'Treino de 45 minutos.',
         priority: 'medium',
         dueDate: null,
-        status: 'pending',
+        status: 'in_progress',
         location: { latitude: 34.052235, longitude: -118.243683 },
     },
     {
@@ -133,7 +133,7 @@ export const todoList: Task[] = [
         description: 'Adicionar filtro por status e prioridade.',
         priority: 'high',
         dueDate: '2025-12-06T14:30:00.000Z',
-        status: 'pending',
+        status: 'cancelled',
         location: { latitude: -33.448891, longitude: -70.669266 },
     },
 ]

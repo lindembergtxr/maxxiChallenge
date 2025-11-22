@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import './app.css'
 import '@i18n/index'
@@ -9,12 +9,14 @@ import { AppRouter } from './router.tsx'
 
 export const ENABLE_MOCKS = (import.meta.env.VITE_ENABLE_MOCKS ?? 'true') === 'true'
 
+const theme = createTheme()
+
 if (import.meta.env.DEV && ENABLE_MOCKS) {
     import('../mocks/browser').then(({ worker }) => {
         worker.start().then(() => {
             createRoot(document.getElementById('root')!).render(
                 <StrictMode>
-                    <ThemeProvider theme={{}}>
+                    <ThemeProvider theme={theme}>
                         <AppRouter />
                     </ThemeProvider>
                 </StrictMode>
@@ -24,7 +26,7 @@ if (import.meta.env.DEV && ENABLE_MOCKS) {
 } else {
     createRoot(document.getElementById('root')!).render(
         <StrictMode>
-            <ThemeProvider theme={{}}>
+            <ThemeProvider theme={theme}>
                 <AppRouter />
             </ThemeProvider>
         </StrictMode>

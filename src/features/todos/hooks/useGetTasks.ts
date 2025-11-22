@@ -10,5 +10,5 @@ export const useTodoList = ({ page, limit }: UseTodoListArgs) => {
         queryKey: ['taskList', page, limit],
         queryFn: () => getTodoList({ page, limit }),
     })
-    return { todoList: data?.data ?? [], isPending, isError, error }
+    return { todoList: data?.data ?? [], totalPages: data?.total ?? 0, isPending, isError, error }
 }

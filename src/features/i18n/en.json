@@ -1,1 +1,17 @@
-{}
+{
+    "taskStatusPending": "pending",
+    "taskStatusInProgress": "in progress",
+    "taskStatusCompleted": "completed",
+    "taskStatusCancelled": "cancelled",
+    "taskPriorityLow": "Low",
+    "taskPriorityMedium": "Medium",
+    "taskPriorityHigh": "High",
+    "todoListTableTitleColumn": "Title",
+    "todoListTablePriorityColumn": "Priority",
+    "todoListTableStatusColumn": "Status",
+    "todoListTableDueDateColumn": "Due Date",
+    "todoListTableLocationColumn": "Location",
+    "todoListTableActionColumn": "Actions",
+    "todoListTableRowsPerPage": "Rows per Page",
+    "todoListTableCountSeparation": "of"
+}

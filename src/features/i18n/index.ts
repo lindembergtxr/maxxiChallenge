@@ -11,6 +11,9 @@ i18n.use(LanguageDetector)
         resources: {
             en: { translation: en },
             pt: { translation: pt },
+            'en-US': { translation: en },
+            'en-UK': { translation: en },
+            'pt-BR': { translation: pt },
         },
         fallbackLng: 'en',
         interpolation: { escapeValue: false },

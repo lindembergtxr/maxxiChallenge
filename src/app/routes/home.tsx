@@ -1,5 +1,5 @@
-import { TodosList } from '@/features/todos'
+import { TodosListPage } from '@/features/todos'
 
 export const HomeRoute = () => {
-    return <TodosList />
+    return <TodosListPage />
 }
