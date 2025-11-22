@@ -1,6 +1,7 @@
 import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig, type Method } from 'axios'
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'https://api.exemplo.com'
+export const ENABLE_MOCKS = (import.meta.env.VITE_ENABLE_MOCKS ?? 'true') === 'true'
 
 class ApiError extends Error {
     status?: number
@@ -34,8 +35,6 @@ const createApi = (baseURL: string, extraConfig: AxiosRequestConfig = {}) => {
     }
 }
 
-export const apiBack = createApi(API_BASE_URL, {
-    headers: {
-        'Content-Type': 'application/json',
-    },
+export const apiBack = createApi(ENABLE_MOCKS ? '' : API_BASE_URL, {
+    headers: { 'Content-Type': 'application/json' },
 })

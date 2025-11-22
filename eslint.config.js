@@ -28,4 +28,12 @@ export default defineConfig([
             'prettier/prettier': 'error',
         },
     },
+    {
+        plugins: { '@tanstack/query': pluginTanstackQuery },
+        rules: {
+            '@tanstack/query/exhaustive-deps': 'error',
+            '@tanstack/query/no-rest-destructuring': 'warn',
+            '@tanstack/query/stable-query-client': 'error',
+        },
+    },
 ])
