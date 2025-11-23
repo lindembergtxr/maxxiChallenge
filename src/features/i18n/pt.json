@@ -7,6 +7,7 @@
     "taskPriorityMedium": "Média",
     "taskPriorityHigh": "Alta",
     "todoListTableTitleColumn": "Título",
+    "todoListTableDescriptionColumn": "Descrição",
     "todoListTablePriorityColumn": "Prioridade",
     "todoListTableStatusColumn": "Status",
     "todoListTableDueDateColumn": "Data de Término",

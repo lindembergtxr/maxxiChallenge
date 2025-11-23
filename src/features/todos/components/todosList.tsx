@@ -21,28 +21,42 @@ import { TodosListStatus } from './todosListStatus'
 import { TodosListPriority } from './todosListPriority'
 import { TodosListItemActions } from './todosListItemActions'
 
-const tableColumns: { id: keyof Task; labelKey: string }[] = [
-    { id: 'title', labelKey: 'todoListTableTitleColumn' },
-    { id: 'priority', labelKey: 'todoListTablePriorityColumn' },
-    { id: 'status', labelKey: 'todoListTableStatusColumn' },
-    { id: 'dueDate', labelKey: 'todoListTableDueDateColumn' },
-    { id: 'location', labelKey: 'todoListTableLocationColumn' },
+const tableColumns: { id: keyof Task; labelKey: string; sortable: boolean }[] = [
+    { id: 'title', labelKey: 'todoListTableTitleColumn', sortable: true },
+    { id: 'description', labelKey: 'todoListTableDescriptionColumn', sortable: true },
+    { id: 'priority', labelKey: 'todoListTablePriorityColumn', sortable: true },
+    { id: 'status', labelKey: 'todoListTableStatusColumn', sortable: true },
+    { id: 'dueDate', labelKey: 'todoListTableDueDateColumn', sortable: true },
+    { id: 'location', labelKey: 'todoListTableLocationColumn', sortable: false },
 ]
 
 export const TodosList = () => {
     const [page, setPage] = useState(0)
     const [pageSize, setPageSize] = useState(10)
-    const [order, setOrder] = useState<'asc' | 'desc'>('asc')
-    const [orderBy, setOrderBy] = useState<keyof Task>('title')
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+    const [sortBy, setSortBy] = useState<keyof Task>('title')
 
     const { t, i18n } = useTranslation()
 
-    const { todoList, totalPages } = useTodoList({ page: page + 1, limit: pageSize })
+    const { todoList, totalPages } = useTodoList({
+        page: page + 1,
+        limit: pageSize,
+        sortBy,
+        sortDirection,
+    })
 
     const handleSort = (property: keyof Task) => {
-        const isAsc = orderBy === property && order === 'asc'
-        setOrder(isAsc ? 'desc' : 'asc')
-        setOrderBy(property)
+        const isAsc = sortBy === property && sortDirection === 'asc'
+        setSortDirection(isAsc ? 'desc' : 'asc')
+        setSortBy(property)
+    }
+
+    const parseDate = (date?: string | null) => {
+        if (!date) return '-'
+        const locale = i18nToDateFnsLocaleMap[i18n.language]
+        const form = i18n.resolvedLanguage === 'en' ? 'MM/dd/yyyy p' : 'dd/MM/yyyy HH:mm'
+
+        return format(new Date(date), form, { locale })
     }
 
     return (
@@ -54,14 +68,20 @@ export const TodosList = () => {
                             <TableRow>
                                 {tableColumns.map((column) => (
                                     <TableCell key={column.id} sx={{ whiteSpace: 'nowrap' }}>
-                                        <TableSortLabel
-                                            active={orderBy === column.id}
-                                            direction={orderBy === column.id ? order : 'asc'}
-                                            onClick={() => handleSort(column.id)}
-                                            sx={{ width: '100%' }}
-                                        >
-                                            {t(column.labelKey)}
-                                        </TableSortLabel>
+                                        {column.sortable ? (
+                                            <TableSortLabel
+                                                active={sortBy === column.id}
+                                                direction={
+                                                    sortBy === column.id ? sortDirection : 'asc'
+                                                }
+                                                onClick={() => handleSort(column.id)}
+                                                sx={{ width: '100%' }}
+                                            >
+                                                {t(column.labelKey)}
+                                            </TableSortLabel>
+                                        ) : (
+                                            t(column.labelKey)
+                                        )}
                                     </TableCell>
                                 ))}
 
@@ -75,6 +95,9 @@ export const TodosList = () => {
                                     <TableCell>
                                         <Typography variant="body2">{task.title}</Typography>
                                     </TableCell>
+                                    <TableCell>
+                                        <Typography variant="body2">{task.description}</Typography>
+                                    </TableCell>
                                     <TableCell sx={{ whiteSpace: 'nowrap' }}>
                                         <TodosListPriority priority={task.priority} />
                                     </TableCell>
@@ -83,24 +106,12 @@ export const TodosList = () => {
                                     </TableCell>
                                     <TableCell sx={{ whiteSpace: 'nowrap' }}>
                                         <Typography variant="body2">
-                                            {task.dueDate
-                                                ? format(
-                                                      new Date(task.dueDate),
-                                                      i18n.resolvedLanguage === 'en'
-                                                          ? 'MM/dd/yyyy p'
-                                                          : 'dd/MM/yyyy HH:mm',
-                                                      {
-                                                          locale: i18nToDateFnsLocaleMap[
-                                                              i18n.language
-                                                          ],
-                                                      }
-                                                  )
-                                                : '-'}
+                                            {parseDate(task.dueDate)}
                                         </Typography>
                                     </TableCell>
                                     <TableCell sx={{ whiteSpace: 'nowrap' }}>
                                         <Typography variant="body2">
-                                            ({task.location.latitude}, {task.location.longitude})
+                                            {task.location.latitude}, {task.location.longitude}
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
