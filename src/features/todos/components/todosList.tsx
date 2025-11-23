@@ -15,7 +15,7 @@ import { Container } from '@mui/material'
 import type { Task } from '@/types'
 import { i18nToDateFnsLocaleMap } from '@/config'
 
-import { useTodoList } from '../hooks/useGetTasks'
+import { useTodoList } from '../hooks/useTodoList'
 import Typography from '@mui/material/Typography'
 import { TodosListStatus } from './todosListStatus'
 import { TodosListPriority } from './todosListPriority'

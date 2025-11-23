@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 
 import type { Task } from '@/types'
-import { getTodoList } from '../api/services'
+import { getTodoList } from '../api/getTodoList'
+
+export const todoListKey = 'taskList'
 
 type UseTodoListArgs = {
     page?: number
@@ -11,7 +13,7 @@ type UseTodoListArgs = {
 }
 export const useTodoList = ({ page, limit, sortBy, sortDirection }: UseTodoListArgs) => {
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['taskList', page, limit, sortBy, sortDirection],
+        queryKey: [todoListKey, page, limit, sortBy, sortDirection],
         queryFn: () => getTodoList({ page, limit, sortBy, sortDirection }),
     })
     return { todoList: data?.data ?? [], totalPages: data?.total ?? 0, isPending, isError, error }
