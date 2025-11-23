@@ -2,7 +2,7 @@ import type { Task } from '@/types'
 
 export const todoList: Task[] = [
     {
-        id: '1',
+        id: '0c3f4e8b-5b91-4e71-a9f7-0f8d3550c9c4',
         title: 'Comprar mantimentos',
         description: 'Ir ao mercado e comprar frutas, legumes e café.',
         priority: 'medium',
@@ -11,7 +11,7 @@ export const todoList: Task[] = [
         location: { latitude: -23.55052, longitude: -46.633308 },
     },
     {
-        id: '2',
+        id: '5c2d0db2-9c98-4e87-8f38-bf8b48f596a4',
         title: 'Enviar relatório semanal',
         description: 'Finalizar e enviar relatório para o gerente.',
         priority: 'high',
@@ -20,7 +20,7 @@ export const todoList: Task[] = [
         location: { latitude: 40.712776, longitude: -74.005974 },
     },
     {
-        id: '3',
+        id: 'efab4a13-4b1d-41b2-b51d-f1e6b9c0b2f3',
         title: 'Revisar PRs',
         description: 'Revisar os pull requests pendentes do time.',
         priority: 'low',
@@ -29,7 +29,7 @@ export const todoList: Task[] = [
         location: { latitude: 51.507351, longitude: -0.127758 },
     },
     {
-        id: '4',
+        id: 'd3b7c422-a4f9-4c00-862b-17ef893f0283',
         title: 'Agendar consulta médica',
         description: 'Marcar consulta de rotina com o clínico geral.',
         priority: 'medium',
@@ -38,7 +38,7 @@ export const todoList: Task[] = [
         location: { latitude: -15.793889, longitude: -47.882778 },
     },
     {
-        id: '5',
+        id: '19b98e5f-0f78-4749-bc04-599daedbb78b',
         title: 'Estudar React Router v7',
         description: 'Ler documentação e testar exemplo básico.',
         priority: 'high',
@@ -47,7 +47,7 @@ export const todoList: Task[] = [
         location: { latitude: 48.856613, longitude: 2.352222 },
     },
     {
-        id: '6',
+        id: '8bcdc2fc-a219-4ef0-9ab1-1dd7588f23e9',
         title: 'Limpar escritório',
         description: 'Organizar mesa, jogar papéis fora e passar pano.',
         priority: 'low',
@@ -56,7 +56,7 @@ export const todoList: Task[] = [
         location: { latitude: -34.603722, longitude: -58.381592 },
     },
     {
-        id: '7',
+        id: 'c77c2687-4f63-4c5e-b0db-7d439dfd2b44',
         title: 'Planejar viagem',
         description: 'Buscar destinos, preços e datas possíveis.',
         priority: 'medium',
@@ -65,7 +65,7 @@ export const todoList: Task[] = [
         location: { latitude: 35.689487, longitude: 139.691711 },
     },
     {
-        id: '8',
+        id: 'e960f813-90cd-463a-a648-daf0c5735265',
         title: 'Atualizar portfólio',
         description: 'Adicionar novo projeto e melhorar descrição dos anteriores.',
         priority: 'high',
@@ -74,7 +74,7 @@ export const todoList: Task[] = [
         location: { latitude: 37.774929, longitude: -122.419418 },
     },
     {
-        id: '9',
+        id: 'a0b85538-36a5-4f6e-adf0-e2faed312ff0',
         title: 'Pagar contas',
         description: 'Pagar luz, água e internet.',
         priority: 'high',
@@ -83,7 +83,7 @@ export const todoList: Task[] = [
         location: { latitude: -22.906847, longitude: -43.172897 },
     },
     {
-        id: '10',
+        id: '4a79263f-2ff9-4e7c-8ff7-4392d24e708d',
         title: 'Ler capítulo do livro',
         description: 'Ler capítulo 12 do livro atual.',
         priority: 'low',
@@ -92,7 +92,7 @@ export const todoList: Task[] = [
         location: { latitude: 52.520008, longitude: 13.404954 },
     },
     {
-        id: '11',
+        id: '707ec41f-4f73-43b8-af55-0c1498aec1f9',
         title: 'Criar mock API',
         description: 'Criar implementação mock para requests da aplicação.',
         priority: 'medium',
@@ -101,7 +101,7 @@ export const todoList: Task[] = [
         location: { latitude: 59.93428, longitude: 30.335099 },
     },
     {
-        id: '12',
+        id: '39e1d198-63a4-4e06-80fd-91f41e4df89b',
         title: 'Fazer exercício físico',
         description: 'Treino de 45 minutos.',
         priority: 'medium',
@@ -110,7 +110,7 @@ export const todoList: Task[] = [
         location: { latitude: 34.052235, longitude: -118.243683 },
     },
     {
-        id: '13',
+        id: '4b4b7303-2b66-487c-9dd5-f444c6c2503a',
         title: 'Atualizar dependências do projeto',
         description: 'Rodar npm outdated e planejar updates.',
         priority: 'low',
@@ -119,7 +119,7 @@ export const todoList: Task[] = [
         location: { latitude: 41.902782, longitude: 12.496366 },
     },
     {
-        id: '14',
+        id: 'd0fa2a2a-e757-4ebc-bc35-83bf9a2d5de3',
         title: 'Responder e-mails',
         description: 'Responder mensagens pendentes no inbox.',
         priority: 'low',
@@ -128,7 +128,7 @@ export const todoList: Task[] = [
         location: { latitude: 45.464203, longitude: 9.189982 },
     },
     {
-        id: '15',
+        id: '6f2356cd-f391-4d75-8e3d-2d44fe58eeb1',
         title: 'Implementar filtro de tarefas',
         description: 'Adicionar filtro por status e prioridade.',
         priority: 'high',

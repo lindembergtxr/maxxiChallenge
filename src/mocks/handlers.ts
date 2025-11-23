@@ -36,4 +36,36 @@ export const handlers = [
             limit,
         })
     }),
+    http.post('/todos', async ({ request }) => {
+        const body = (await request.json()) as Omit<Task, 'id'>
+
+        const newTask: Task = { id: crypto.randomUUID(), ...body }
+
+        todoList.push(newTask)
+
+        return HttpResponse.json({ task: newTask }, { status: 201 })
+    }),
+    http.put('/todos/:id', async ({ params, request }) => {
+        const id = params.id as string
+        const index = todoList.findIndex((t) => t.id === id)
+
+        if (index === -1) return HttpResponse.json({ message: 'Not found' }, { status: 404 })
+
+        const body = (await request.json()) as Task
+        const updated = { ...todoList[index], ...body }
+
+        todoList[index] = updated
+
+        return HttpResponse.json({ task: updated }, { status: 200 })
+    }),
+    http.delete('/todos/:id', ({ params }) => {
+        const id = params.id as string
+        const index = todoList.findIndex((t) => t.id === id)
+
+        if (index === -1) return HttpResponse.json({ error: 'Task not found' }, { status: 404 })
+
+        todoList.splice(index, 1)
+
+        return HttpResponse.json(null, { status: 204 })
+    }),
 ]
