@@ -13,5 +13,8 @@
     "todoListTableLocationColumn": "Location",
     "todoListTableActionColumn": "Actions",
     "todoListTableRowsPerPage": "Rows per Page",
-    "todoListTableCountSeparation": "of"
+    "todoListTableCountSeparation": "of",
+    "todoListTableActionDetails": "See details",
+    "todoListTableActionEdit": "Edit",
+    "todoListTableActionRemove": "Remove"
 }

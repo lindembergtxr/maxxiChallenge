@@ -13,5 +13,8 @@
     "todoListTableLocationColumn": "Localização",
     "todoListTableActionColumn": "Ações",
     "todoListTableRowsPerPage": "Linhas por página",
-    "todoListTableCountSeparation": "de"
+    "todoListTableCountSeparation": "de",
+    "todoListTableActionDetails": "Ver detalhes",
+    "todoListTableActionEdit": "Editar",
+    "todoListTableActionRemove": "Remover"
 }

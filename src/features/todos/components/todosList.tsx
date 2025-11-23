@@ -13,11 +13,13 @@ import TablePagination from '@mui/material/TablePagination'
 import { Container } from '@mui/material'
 
 import type { Task } from '@/types'
+import { i18nToDateFnsLocaleMap } from '@/config'
+
 import { useTodoList } from '../hooks/useGetTasks'
 import Typography from '@mui/material/Typography'
 import { TodosListStatus } from './todosListStatus'
 import { TodosListPriority } from './todosListPriority'
-import { i18nToDateFnsLocaleMap } from '@/config'
+import { TodosListItemActions } from './todosListItemActions'
 
 const tableColumns: { id: keyof Task; labelKey: string }[] = [
     { id: 'title', labelKey: 'todoListTableTitleColumn' },
@@ -30,7 +32,6 @@ const tableColumns: { id: keyof Task; labelKey: string }[] = [
 export const TodosList = () => {
     const [page, setPage] = useState(0)
     const [pageSize, setPageSize] = useState(10)
-
     const [order, setOrder] = useState<'asc' | 'desc'>('asc')
     const [orderBy, setOrderBy] = useState<keyof Task>('title')
 
@@ -102,7 +103,9 @@ export const TodosList = () => {
                                             ({task.location.latitude}, {task.location.longitude})
                                         </Typography>
                                     </TableCell>
-                                    <TableCell>{/* Add action dropdown here */}</TableCell>
+                                    <TableCell>
+                                        <TodosListItemActions task={task} />
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
