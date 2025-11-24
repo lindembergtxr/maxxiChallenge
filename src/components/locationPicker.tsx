@@ -31,8 +31,6 @@ export const LocationPicker = ({
 }: MapPickerProps) => {
     const [position, setPosition] = useState<GeoPoint | null>(coordinate ?? null)
 
-    console.log('coordinate', coordinate)
-
     useEffect(() => {
         setPosition(coordinate)
     }, [coordinate])

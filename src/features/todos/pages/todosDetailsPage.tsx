@@ -8,13 +8,16 @@ import { LocationPicker } from '@/components/locationPicker'
 import type { GeoPoint } from '@/types'
 import { useTask } from '../hooks/useTask'
 
-export const TodosDetailsPage = () => {
+type TodosDetailsPageProps = {
+    id?: string
+}
+export const TodosDetailsPage = ({ id }: TodosDetailsPageProps) => {
     const { t } = useTranslation()
 
     const params = useParams()
     const navigate = useNavigate()
 
-    const { task } = useTask({ id: params?.id ?? '' })
+    const { task } = useTask({ id: id ?? params?.id ?? '' })
 
     const editTask = () => {
         if (task) navigate(`/tasks/${task.id}/edit`)
