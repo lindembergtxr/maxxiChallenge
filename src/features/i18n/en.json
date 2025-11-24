@@ -57,5 +57,6 @@
     "navbarDashboardLabel": "Dashboard",
     "navbarDashboardTitle": "Dashboard",
     "navbarDashboard.status": "Tasks by Status",
-    "navbarDashboard.priority": "Tasks by Prioridade"
+    "navbarDashboard.priority": "Tasks by Prioridade",
+    "todoListTableEmpty": "Empty list. Add a new task to view it"
 }

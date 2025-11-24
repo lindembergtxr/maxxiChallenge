@@ -57,5 +57,6 @@
     "navbarDashboardLabel": "Dashboard",
     "navbarDashboardTitle": "Dashboard",
     "navbarDashboard.status": "Tarefas por Status",
-    "navbarDashboard.priority": "Tarefas por Prioridade"
+    "navbarDashboard.priority": "Tarefas por Prioridade",
+    "todoListTableEmpty": "Lista vazia. Adicione itens para visualizar"
 }

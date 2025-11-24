@@ -27,7 +27,7 @@ export const TodosMapPage = () => {
         >
             <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', mb: 2 }}>
                 <Typography variant="h6" fontWeight={600}>
-                    {t('todoMapPageTitle')}
+                    {t('todoMapPageTitle')} ({todoList.length})
                 </Typography>
 
                 <Typography variant="subtitle2">{t('todoMapPageSubtitle')}</Typography>

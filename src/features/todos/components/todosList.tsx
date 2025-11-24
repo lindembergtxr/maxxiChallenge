@@ -87,6 +87,15 @@ export const TodosList = () => {
                     </TableHead>
 
                     <TableBody>
+                        {todoList.length === 0 && (
+                            <TableRow>
+                                <TableCell colSpan={tableColumns.length + 1} align="center">
+                                    <Typography variant="body2" color="text.secondary">
+                                        {t('todoListTableEmpty')}
+                                    </Typography>
+                                </TableCell>
+                            </TableRow>
+                        )}
                         {todoList.map((task) => (
                             <TableRow key={task.id}>
                                 <TableCell>

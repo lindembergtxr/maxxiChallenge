@@ -27,22 +27,46 @@ export const DashboardPage = () => {
     return (
         <Container sx={{ display: 'flex', flexDirection: 'column', gap: 2, py: 5 }}>
             <Typography variant="h6" fontWeight={600}>
-                {t('navbarDashboardTitle')}
+                {t('navbarDashboardTitle')} ({todoList.length})
             </Typography>
 
             <Container disableGutters sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                <Card sx={{ flex: 1, p: 2, minWidth: 250 }}>
+                <Card
+                    sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 2, minWidth: 250 }}
+                >
                     <Typography variant="caption" fontWeight={600} gutterBottom>
                         {t('navbarDashboard.status')}
                     </Typography>
-                    <TaskPieChart tasks={tasksByStatus} field="status" />
+                    {tasksByStatus.length === 0 ? (
+                        <Typography
+                            variant="caption"
+                            gutterBottom
+                            sx={{ mt: 5, textAlign: 'center' }}
+                        >
+                            {t('todoListTableEmpty')}
+                        </Typography>
+                    ) : (
+                        <TaskPieChart tasks={tasksByStatus} field="status" />
+                    )}
                 </Card>
 
-                <Card sx={{ flex: 1, p: 2, minWidth: 250 }}>
+                <Card
+                    sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 2, minWidth: 250 }}
+                >
                     <Typography variant="caption" fontWeight={600} gutterBottom>
                         {t('navbarDashboard.priority')}
                     </Typography>
-                    <TaskPieChart tasks={tasksByPriority} field="priority" />
+                    {tasksByPriority.length === 0 ? (
+                        <Typography
+                            variant="caption"
+                            gutterBottom
+                            sx={{ mt: 5, textAlign: 'center' }}
+                        >
+                            {t('todoListTableEmpty')}
+                        </Typography>
+                    ) : (
+                        <TaskPieChart tasks={tasksByPriority} field="priority" />
+                    )}
                 </Card>
             </Container>
         </Container>
