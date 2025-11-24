@@ -53,5 +53,9 @@
     "todoMapPageTitle": "Tarefas",
     "todoMapPageSubtitle": "Visualize as tarefas salvas. Clique em uma tag para ver os detalhes",
     "navbarListLabel": "Lista",
-    "navbarMapLabel": "Mapa"
+    "navbarMapLabel": "Mapa",
+    "navbarDashboardLabel": "Dashboard",
+    "navbarDashboardTitle": "Dashboard",
+    "navbarDashboard.status": "Tarefas por Status",
+    "navbarDashboard.priority": "Tarefas por Prioridade"
 }

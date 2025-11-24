@@ -24,6 +24,10 @@ export const Navbar = () => {
                     <Button color="inherit" component={NavLink} to="/map">
                         {t('navbarMapLabel')}
                     </Button>
+
+                    <Button color="inherit" component={NavLink} to="/dashboard">
+                        {t('navbarDashboardLabel')}
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>

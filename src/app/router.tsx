@@ -6,6 +6,7 @@ import { CreateRoute } from './routes/create'
 import { EditRoute } from './routes/edit'
 import { DetailsRoute } from './routes/details'
 import { MapRoute } from './routes/map'
+import { DashboardRoute } from './routes/dashboard'
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
         path: '/map',
         element: <RootRoute />,
         children: [{ index: true, element: <MapRoute /> }],
+    },
+    {
+        path: '/dashboard',
+        element: <RootRoute />,
+        children: [{ index: true, element: <DashboardRoute /> }],
     },
 ])
 

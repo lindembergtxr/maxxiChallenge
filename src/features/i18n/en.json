@@ -53,5 +53,9 @@
     "todoMapPageTitle": "Tasks",
     "todoMapPageSubtitle": "Vies saved tasks locations. Click on a tag to see the details",
     "navbarListLabel": "List",
-    "navbarMapLabel": "Map"
+    "navbarMapLabel": "Map",
+    "navbarDashboardLabel": "Dashboard",
+    "navbarDashboardTitle": "Dashboard",
+    "navbarDashboard.status": "Tasks by Status",
+    "navbarDashboard.priority": "Tasks by Prioridade"
 }
