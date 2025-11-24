@@ -43,5 +43,8 @@
     "status.inProgress.label": "Em andamento",
     "status.completed.label": "Completada",
     "status.cancelled.label": "Cancelada",
-    "formCoordinateMap": "Clique para selecionar as coordenadas no mapa"
+    "formCoordinateMap": "Clique para selecionar as coordenadas no mapa",
+    "formSubmit": "Salvar alterações",
+    "todoListPageTitle": "Lista de tarefas",
+    "todoListPageButton": "Adicionar tarefa"
 }

@@ -1,6 +1,7 @@
 import type { Priority, Status } from '@/types'
 
 export type FormData = {
+    id?: string
     title: string | null
     description: string | null
     status: Status

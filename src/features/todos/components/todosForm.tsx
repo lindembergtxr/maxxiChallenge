@@ -11,6 +11,8 @@ import { FormRadioGroup } from '@/components/formRadioGroup'
 
 import type { FormData } from '../types/formType'
 import { cleanForm, getDefaultForm } from '../utils/getDefaultForm'
+import { useTranslation } from 'react-i18next'
+import { useDebouncedEffect } from '@/hooks/useDebounce'
 
 const taskSchema = z.object({
     title: z
@@ -40,13 +42,16 @@ const taskSchema = z.object({
 })
 
 type TodosFormProps = {
-    task: TaskForm | null
+    task: FormData | null
     canUpdate?: boolean
+    canSubmit?: boolean
     onChange: (value: TaskForm) => void
     onSubmit: (value: TaskForm) => void
 }
-export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProps) => {
+export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: TodosFormProps) => {
     const lastValuesRef = useRef<FormData | null>(null)
+
+    const { t } = useTranslation()
 
     const methods = useForm<FormData>({
         defaultValues: getDefaultForm(task),
@@ -57,36 +62,61 @@ export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProp
     const submit = (data: FormData) => onSubmit(cleanForm(data))
 
     useEffect(() => {
-        console.log(task, 'taaaasl')
-        if (task) methods.reset(task, { keepErrors: true, keepDirty: true })
-    }, [task, methods.reset])
+        if (!task) return
+
+        const currentValues = methods.getValues()
+        const taskValues = cleanForm(task)
+
+        if (JSON.stringify(currentValues) !== JSON.stringify(taskValues)) {
+            methods.reset(taskValues, { keepErrors: true, keepDirty: true })
+        }
+    }, [task, methods])
+
+    useDebouncedEffect(
+        task,
+        (debounced) => {
+            if (!debounced) return
+
+            const currentValues = methods.getValues()
+            const taskValues = cleanForm(debounced)
+
+            if (JSON.stringify(currentValues) !== JSON.stringify(taskValues)) {
+                methods.reset(taskValues, { keepErrors: true, keepDirty: true })
+            }
+        },
+        300
+    )
 
     const watchedValues = methods.watch()
 
     const errors = methods.formState.errors
 
-    useEffect(() => {
-        if (!onChange || !canUpdate) return
+    useDebouncedEffect(
+        watchedValues,
+        (debounced) => {
+            if (!onChange || !canUpdate) return
 
-        const cleaned = cleanForm(watchedValues, task?.id)
+            const cleaned = cleanForm(debounced, task?.id)
 
-        if (JSON.stringify(cleaned) !== JSON.stringify(lastValuesRef.current)) {
-            lastValuesRef.current = cleaned
-            onChange(cleaned)
-        }
-    }, [watchedValues, onChange, canUpdate])
+            if (JSON.stringify(cleaned) !== JSON.stringify(lastValuesRef.current)) {
+                lastValuesRef.current = cleaned
+                onChange(cleaned)
+            }
+        },
+        300
+    )
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(submit)}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: { sm: '25vw' },
-                        minWidth: { xs: '100%', sm: 450 },
-                    }}
-                >
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    height: '100%',
+                }}
+            >
+                <form onSubmit={methods.handleSubmit(submit)}>
                     <FormInput
                         id="task-title"
                         label="title.label"
@@ -113,7 +143,7 @@ export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProp
                         label="status.label"
                         radioList={[
                             { value: 'pending', label: 'status.pending.label' },
-                            { value: 'inProgress', label: 'status.inProgress.label' },
+                            { value: 'in_progress', label: 'status.inProgress.label' },
                             { value: 'completed', label: 'status.completed.label' },
                             { value: 'cancelled', label: 'status.cancelled.label' },
                         ]}
@@ -143,7 +173,7 @@ export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProp
                         errorMessage={errors?.dueDate?.message}
                     />
 
-                    <Box sx={{ display: 'flex', width: '100%', gap: 2 }}>
+                    <Box sx={{ display: 'flex', gap: 2, width: '100%' }}>
                         <FormNumber
                             id="task-latitude"
                             label="latitude.label"
@@ -169,9 +199,11 @@ export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProp
                             errorMessage={errors?.location?.longitude?.message}
                         />
                     </Box>
-                    <Button type="submit">Submit</Button>
-                </Box>
-            </form>
+                    <Button type="submit" disabled={!canSubmit}>
+                        {t('formSubmit')}
+                    </Button>
+                </form>
+            </Box>
         </FormProvider>
     )
 }

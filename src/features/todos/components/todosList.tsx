@@ -60,86 +60,82 @@ export const TodosList = () => {
     }
 
     return (
-        <div>
-            <Container>
-                <TableContainer>
-                    <Table stickyHeader size="small" aria-label="todos table">
-                        <TableHead>
-                            <TableRow>
-                                {tableColumns.map((column) => (
-                                    <TableCell key={column.id} sx={{ whiteSpace: 'nowrap' }}>
-                                        {column.sortable ? (
-                                            <TableSortLabel
-                                                active={sortBy === column.id}
-                                                direction={
-                                                    sortBy === column.id ? sortDirection : 'asc'
-                                                }
-                                                onClick={() => handleSort(column.id)}
-                                                sx={{ width: '100%' }}
-                                            >
-                                                {t(column.labelKey)}
-                                            </TableSortLabel>
-                                        ) : (
-                                            t(column.labelKey)
-                                        )}
-                                    </TableCell>
-                                ))}
-
-                                <TableCell>{t('todoListTableActionColumn')}</TableCell>
-                            </TableRow>
-                        </TableHead>
-
-                        <TableBody>
-                            {todoList.map((task) => (
-                                <TableRow key={task.id}>
-                                    <TableCell>
-                                        <Typography variant="body2">{task.title}</Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2">{task.description}</Typography>
-                                    </TableCell>
-                                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
-                                        <TodosListPriority priority={task.priority} />
-                                    </TableCell>
-                                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
-                                        <TodosListStatus status={task.status} />
-                                    </TableCell>
-                                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
-                                        <Typography variant="body2">
-                                            {parseDate(task.dueDate)}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
-                                        <Typography variant="body2">
-                                            {task.location.latitude}, {task.location.longitude}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <TodosListItemActions task={task} />
-                                    </TableCell>
-                                </TableRow>
+        <Container disableGutters>
+            <TableContainer>
+                <Table stickyHeader size="small" aria-label="todos table">
+                    <TableHead>
+                        <TableRow>
+                            {tableColumns.map((column) => (
+                                <TableCell key={column.id} sx={{ whiteSpace: 'nowrap' }}>
+                                    {column.sortable ? (
+                                        <TableSortLabel
+                                            active={sortBy === column.id}
+                                            direction={sortBy === column.id ? sortDirection : 'asc'}
+                                            onClick={() => handleSort(column.id)}
+                                            sx={{ width: '100%' }}
+                                        >
+                                            {t(column.labelKey)}
+                                        </TableSortLabel>
+                                    ) : (
+                                        t(column.labelKey)
+                                    )}
+                                </TableCell>
                             ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
 
-                <TablePagination
-                    component="div"
-                    count={totalPages}
-                    page={page}
-                    labelRowsPerPage={t('todoListTableRowsPerPage')}
-                    labelDisplayedRows={({ from, to, count }) =>
-                        `${from}-${to} ${t('todoListTableCountSeparation')} ${count}`
-                    }
-                    onPageChange={(_, newPage) => setPage(newPage)}
-                    rowsPerPage={pageSize}
-                    onRowsPerPageChange={(event) => {
-                        setPageSize(parseInt(event.target.value, 10))
-                        setPage(0)
-                    }}
-                    rowsPerPageOptions={[5, 10, 25]}
-                />
-            </Container>
-        </div>
+                            <TableCell>{t('todoListTableActionColumn')}</TableCell>
+                        </TableRow>
+                    </TableHead>
+
+                    <TableBody>
+                        {todoList.map((task) => (
+                            <TableRow key={task.id}>
+                                <TableCell>
+                                    <Typography variant="body2">{task.title}</Typography>
+                                </TableCell>
+                                <TableCell>
+                                    <Typography variant="body2">{task.description}</Typography>
+                                </TableCell>
+                                <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                                    <TodosListPriority priority={task.priority} />
+                                </TableCell>
+                                <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                                    <TodosListStatus status={task.status} />
+                                </TableCell>
+                                <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                                    <Typography variant="body2">
+                                        {parseDate(task.dueDate)}
+                                    </Typography>
+                                </TableCell>
+                                <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                                    <Typography variant="body2">
+                                        {task.location.latitude}, {task.location.longitude}
+                                    </Typography>
+                                </TableCell>
+                                <TableCell>
+                                    <TodosListItemActions task={task} />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+            <TablePagination
+                component="div"
+                count={totalPages}
+                page={page}
+                labelRowsPerPage={t('todoListTableRowsPerPage')}
+                labelDisplayedRows={({ from, to, count }) =>
+                    `${from}-${to} ${t('todoListTableCountSeparation')} ${count}`
+                }
+                onPageChange={(_, newPage) => setPage(newPage)}
+                rowsPerPage={pageSize}
+                onRowsPerPageChange={(event) => {
+                    setPageSize(parseInt(event.target.value, 10))
+                    setPage(0)
+                }}
+                rowsPerPageOptions={[5, 10, 25]}
+            />
+        </Container>
     )
 }
