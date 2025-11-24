@@ -58,7 +58,7 @@ export const FormInput = ({
                         {...props}
                         id={id}
                         placeholder={placeholderText}
-                        value={field.value === null ? undefined : field.value}
+                        value={field.value ?? ''}
                         onChange={(event) => field.onChange(event.target.value ?? null)}
                         onBlur={field.onBlur}
                         inputRef={field.ref}

@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
+import 'leaflet/dist/leaflet.css'
 import './app.css'
 import '@i18n/index'
 

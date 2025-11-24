@@ -42,5 +42,6 @@
     "status.pending.label": "Pendente",
     "status.inProgress.label": "Em andamento",
     "status.completed.label": "Completada",
-    "status.cancelled.label": "Cancelada"
+    "status.cancelled.label": "Cancelada",
+    "formCoordinateMap": "Clique para selecionar as coordenadas no mapa"
 }

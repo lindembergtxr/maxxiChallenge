@@ -1,38 +1,16 @@
+import { useEffect, useRef } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Box, Button } from '@mui/material'
-import type { Priority, Status, Task, TaskForm } from '@/types'
+import type { TaskForm } from '@/types'
 import { FormInput } from '@/components/formInput'
 import { FormNumber } from '@/components/formNumber'
 import { FormRadioGroup } from '@/components/formRadioGroup'
-import { useEffect } from 'react'
 
-type FormData = {
-    title: string | null
-    description: string | null
-    status: Status
-    priority: Priority | null
-    dueDate: string | null
-    location: {
-        latitude: number | null
-        longitude: number | null
-    }
-}
-
-const defaultValues = (task?: Task): FormData => {
-    return {
-        title: task?.title ?? null,
-        description: task?.description ?? null,
-        status: task?.status ?? 'pending',
-        priority: task?.priority ?? null,
-        dueDate: task?.dueDate ?? null,
-        location: {
-            latitude: task?.location?.latitude ?? null,
-            longitude: task?.location?.longitude ?? null,
-        },
-    }
-}
+import type { FormData } from '../types/formType'
+import { cleanForm, getDefaultForm } from '../utils/getDefaultForm'
 
 const taskSchema = z.object({
     title: z
@@ -61,28 +39,17 @@ const taskSchema = z.object({
     }),
 })
 
-const cleanForm = (values: FormData, id?: string): TaskForm => ({
-    ...(id && { id }),
-    title: values.title ?? '',
-    description: values.description ?? '',
-    status: values.status ?? 'pending',
-    priority: values.priority ?? 'low',
-    dueDate: values.dueDate ?? '',
-    location: {
-        latitude: values.location.latitude ?? 0,
-        longitude: values.location.longitude ?? 0,
-    },
-})
-
 type TodosFormProps = {
-    task?: Task
+    task: TaskForm | null
     canUpdate?: boolean
     onChange: (value: TaskForm) => void
     onSubmit: (value: TaskForm) => void
 }
 export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProps) => {
+    const lastValuesRef = useRef<FormData | null>(null)
+
     const methods = useForm<FormData>({
-        defaultValues: defaultValues(task),
+        defaultValues: getDefaultForm(task),
         resolver: zodResolver(taskSchema),
         mode: 'onChange',
     })
@@ -90,6 +57,7 @@ export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProp
     const submit = (data: FormData) => onSubmit(cleanForm(data))
 
     useEffect(() => {
+        console.log(task, 'taaaasl')
         if (task) methods.reset(task, { keepErrors: true, keepDirty: true })
     }, [task, methods.reset])
 
@@ -98,10 +66,15 @@ export const TodosForm = ({ task, canUpdate, onChange, onSubmit }: TodosFormProp
     const errors = methods.formState.errors
 
     useEffect(() => {
-        if (!onChange) return
+        if (!onChange || !canUpdate) return
 
-        if (canUpdate) onChange(cleanForm(watchedValues, task?.id))
-    }, [watchedValues, onChange])
+        const cleaned = cleanForm(watchedValues, task?.id)
+
+        if (JSON.stringify(cleaned) !== JSON.stringify(lastValuesRef.current)) {
+            lastValuesRef.current = cleaned
+            onChange(cleaned)
+        }
+    }, [watchedValues, onChange, canUpdate])
 
     return (
         <FormProvider {...methods}>
