@@ -8,18 +8,20 @@ export const todoListKey = 'taskList'
 type UseTodoListArgs = {
     page?: number
     limit?: number
+    filter?: string
     sortBy?: keyof Task
     sortDirection?: 'asc' | 'desc'
 }
 export const useTodoList = ({
     page,
     limit,
+    filter,
     sortBy = 'title',
     sortDirection = 'asc',
 }: UseTodoListArgs) => {
     const { isPending, isError, data, error } = useQuery({
-        queryKey: [todoListKey, page, limit, sortBy, sortDirection],
-        queryFn: () => getTodoList({ page, limit, sortBy, sortDirection }),
+        queryKey: [todoListKey, page, limit, sortBy, sortDirection, filter],
+        queryFn: () => getTodoList({ page, limit, sortBy, sortDirection, filter }),
     })
     return { todoList: data?.data ?? [], totalPages: data?.total ?? 0, isPending, isError, error }
 }

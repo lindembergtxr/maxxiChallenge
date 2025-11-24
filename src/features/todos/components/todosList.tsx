@@ -10,7 +10,7 @@ import TableSortLabel from '@mui/material/TableSortLabel'
 import TableBody from '@mui/material/TableBody'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
-import { Container } from '@mui/material'
+import { Container, InputBase } from '@mui/material'
 
 import type { Task } from '@/types'
 import { i18nToDateFnsLocaleMap } from '@/config'
@@ -35,6 +35,7 @@ export const TodosList = () => {
     const [pageSize, setPageSize] = useState(10)
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
     const [sortBy, setSortBy] = useState<keyof Task>('title')
+    const [filter, setFilter] = useState('')
 
     const { t, i18n } = useTranslation()
 
@@ -43,6 +44,7 @@ export const TodosList = () => {
         limit: pageSize,
         sortBy,
         sortDirection,
+        filter,
     })
 
     const handleSort = (property: keyof Task) => {
@@ -61,6 +63,26 @@ export const TodosList = () => {
 
     return (
         <Container disableGutters>
+            <InputBase
+                size="small"
+                id="todoListFilter"
+                placeholder={t('todoListFilterPlaceholder')}
+                value={filter}
+                onChange={(event) => setFilter(event.target.value ?? null)}
+                sx={(theme) => ({
+                    ...theme.typography.caption,
+                    px: 2,
+                    py: 1,
+                    pb: 0.2,
+                    borderRadius: 1,
+                    minWidth: 300,
+                    mb: 2,
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    '&:focus-within': { borderColor: theme.palette.primary.main },
+                })}
+            />
+
             <TableContainer>
                 <Table stickyHeader size="small" aria-label="todos table">
                     <TableHead>

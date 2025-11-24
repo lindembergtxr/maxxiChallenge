@@ -58,5 +58,6 @@
     "navbarDashboardTitle": "Dashboard",
     "navbarDashboard.status": "Tarefas por Status",
     "navbarDashboard.priority": "Tarefas por Prioridade",
-    "todoListTableEmpty": "Lista vazia. Adicione itens para visualizar"
+    "todoListTableEmpty": "Lista vazia. Adicione itens para visualizar",
+    "todoListFilterPlaceholder": "Digite para buscar por título ou descrição"
 }

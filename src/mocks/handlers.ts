@@ -7,7 +7,9 @@ export const handlers = [
         const url = new URL(request.url)
 
         const page = Number(url.searchParams.get('page') ?? 1)
-        const limit = Number(url.searchParams.get('limit') ?? 10)
+        const limit = Number(url.searchParams.get('limit') ?? 99999)
+
+        const filter = url.searchParams.get('filter')
 
         const start = (page - 1) * limit
         const end = start + limit
@@ -27,6 +29,12 @@ export const handlers = [
                 if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1
                 return 0
             })
+            .filter(
+                (task) =>
+                    !filter ||
+                    task.title.toLowerCase().includes(filter.toLowerCase()) ||
+                    task.description.toLowerCase().includes(filter.toLowerCase())
+            )
             .slice(start, end)
 
         return HttpResponse.json({

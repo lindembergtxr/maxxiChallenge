@@ -6,6 +6,7 @@ type GetTodoListParams = {
     limit?: number
     sortBy: keyof Task
     sortDirection: 'asc' | 'desc'
+    filter?: string
 }
 export const getTodoList = (params?: GetTodoListParams) => {
     return apiBack.get<Paginated<Task>>('/todos', { params })
