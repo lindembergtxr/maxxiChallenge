@@ -31,6 +31,8 @@ export const LocationPicker = ({
 }: MapPickerProps) => {
     const [position, setPosition] = useState<GeoPoint | null>(coordinate ?? null)
 
+    console.log('coordinate', coordinate)
+
     useEffect(() => {
         setPosition(coordinate)
     }, [coordinate])
@@ -55,7 +57,7 @@ export const LocationPicker = ({
             >
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <ClickHandler />
-                {editable && <MapUpdater position={position} />}
+                <MapUpdater position={position} />
                 {position && <Marker position={[position.latitude, position.longitude]} />}
             </MapContainer>
         </Box>

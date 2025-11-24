@@ -27,7 +27,7 @@ export const TodosDetailsPage = () => {
                     {t('todoDetailsPageTitle')}
                 </Typography>
 
-                <Button onClick={editTask}>{t('todoListTableActionDetails')}</Button>
+                <Button onClick={editTask}>{t('todoEditPageTitle')}</Button>
             </Box>
 
             <Container

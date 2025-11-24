@@ -1,4 +1,5 @@
 {
+    "title": "Maxxi Desafio técnico",
     "taskStatusPending": "pendente",
     "taskStatusInProgress": "em andamento",
     "taskStatusCompleted": "completada",
@@ -48,5 +49,9 @@
     "todoListPageTitle": "Lista de tarefas",
     "todoListPageButton": "Adicionar tarefa",
     "todoDetailsPageTitle": "Tarefa",
-    "todoEditPageTitle": "Editar tarefa"
+    "todoEditPageTitle": "Editar tarefa",
+    "todoMapPageTitle": "Tarefas",
+    "todoMapPageSubtitle": "Visualize as tarefas salvas. Clique em uma tag para ver os detalhes",
+    "navbarListLabel": "Lista",
+    "navbarMapLabel": "Mapa"
 }
