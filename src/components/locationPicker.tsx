@@ -24,7 +24,7 @@ type MapPickerProps = {
 }
 export const LocationPicker = ({
     coordinate,
-    editable = true,
+    editable = false,
     zoom = INITIAL_ZOOM,
     size = 500,
     onChange,
@@ -55,7 +55,7 @@ export const LocationPicker = ({
             >
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <ClickHandler />
-                <MapUpdater position={position} />
+                {editable && <MapUpdater position={position} />}
                 {position && <Marker position={[position.latitude, position.longitude]} />}
             </MapContainer>
         </Box>

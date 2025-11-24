@@ -46,5 +46,7 @@
     "formCoordinateMap": "Click to select a coordenate in the map",
     "formSubmit": "Save changes",
     "todoListPageTitle": "Task List",
-    "todoListPageButton": "Add task"
+    "todoListPageButton": "Add task",
+    "todoDetailsPageTitle": "Task",
+    "todoEditPageTitle": "Edit task"
 }

@@ -45,10 +45,18 @@ type TodosFormProps = {
     task: FormData | null
     canUpdate?: boolean
     canSubmit?: boolean
-    onChange: (value: TaskForm) => void
-    onSubmit: (value: TaskForm) => void
+    disabled?: boolean
+    onChange?: (value: TaskForm) => void
+    onSubmit?: (value: TaskForm) => void
 }
-export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: TodosFormProps) => {
+export const TodosForm = ({
+    task,
+    canUpdate,
+    canSubmit,
+    disabled,
+    onChange,
+    onSubmit,
+}: TodosFormProps) => {
     const lastValuesRef = useRef<FormData | null>(null)
 
     const { t } = useTranslation()
@@ -59,7 +67,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
         mode: 'onChange',
     })
 
-    const submit = (data: FormData) => onSubmit(cleanForm(data))
+    const submit = (data: FormData) => onSubmit?.(cleanForm(data))
 
     useEffect(() => {
         if (!task) return
@@ -122,6 +130,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                         label="title.label"
                         name="title"
                         placeholder="title.placeholder"
+                        disabled={disabled}
                         error={!!errors?.title}
                         errorMessage={errors?.title?.message}
                     />
@@ -133,6 +142,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                         placeholder="description.placeholder"
                         multiline
                         minRows={3}
+                        disabled={disabled}
                         error={!!errors?.description}
                         errorMessage={errors?.description?.message}
                     />
@@ -147,6 +157,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                             { value: 'completed', label: 'status.completed.label' },
                             { value: 'cancelled', label: 'status.cancelled.label' },
                         ]}
+                        disabled={disabled}
                         error={!!errors.status}
                         errorMessage={errors.status?.message}
                     />
@@ -160,6 +171,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                             { value: 'medium', label: 'priority.medium.label' },
                             { value: 'high', label: 'priority.high.label' },
                         ]}
+                        disabled={disabled}
                         error={!!errors.priority}
                         errorMessage={errors.priority?.message}
                     />
@@ -169,6 +181,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                         label="dueDate.label"
                         name="dueDate"
                         type="date"
+                        disabled={disabled}
                         error={!!errors?.dueDate}
                         errorMessage={errors?.dueDate?.message}
                     />
@@ -182,6 +195,7 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                             isAllowed={({ floatValue }) =>
                                 floatValue === undefined || (floatValue >= -90 && floatValue <= 90)
                             }
+                            disabled={disabled}
                             error={!!errors?.location?.latitude}
                             errorMessage={errors?.location?.latitude?.message}
                         />
@@ -195,13 +209,16 @@ export const TodosForm = ({ task, canUpdate, canSubmit, onChange, onSubmit }: To
                                 floatValue === undefined ||
                                 (floatValue >= -180 && floatValue <= 180)
                             }
+                            disabled={disabled}
                             error={!!errors?.location?.longitude}
                             errorMessage={errors?.location?.longitude?.message}
                         />
                     </Box>
-                    <Button type="submit" disabled={!canSubmit}>
-                        {t('formSubmit')}
-                    </Button>
+                    {!disabled && (
+                        <Button type="submit" disabled={!canSubmit}>
+                            {t('formSubmit')}
+                        </Button>
+                    )}
                 </form>
             </Box>
         </FormProvider>

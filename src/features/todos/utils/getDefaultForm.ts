@@ -1,7 +1,7 @@
 import type { Task, TaskForm } from '@/types'
 import type { FormData } from '../types/formType'
 
-export const getDefaultForm = (task: FormData | Task | null): FormData => {
+export const getDefaultForm = (task: FormData | Task | null | undefined): FormData => {
     return {
         title: task?.title ?? null,
         description: task?.description ?? null,

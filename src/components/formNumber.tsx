@@ -14,7 +14,7 @@ type FormNumberProps = {
     error: boolean
     required?: boolean
     errorMessage: string | undefined
-} & Pick<ComponentProps<typeof NumericFormat>, 'isAllowed'>
+} & Pick<ComponentProps<typeof NumericFormat>, 'isAllowed' | 'disabled'>
 export const FormNumber = ({
     id,
     label,

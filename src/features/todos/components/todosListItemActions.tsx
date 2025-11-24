@@ -7,6 +7,8 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 import type { Task } from '@/types'
+import { useRemoveTask } from '../hooks'
+import { useNavigate } from 'react-router-dom'
 
 type TodosListItemActionsProps = {
     task: Task
@@ -16,6 +18,10 @@ export const TodosListItemActions = ({ task }: TodosListItemActionsProps) => {
 
     const { t } = useTranslation()
 
+    const navigate = useNavigate()
+
+    const { mutate, isPending } = useRemoveTask()
+
     const open = Boolean(anchorEl)
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) =>
@@ -23,11 +29,15 @@ export const TodosListItemActions = ({ task }: TodosListItemActionsProps) => {
 
     const handleClose = () => setAnchorEl(null)
 
-    const openTask = () => {}
+    const openTask = () => {
+        if (task.id) navigate(`/tasks/${task.id}`)
+    }
 
-    const editTask = () => {}
+    const editTask = () => {
+        navigate(`/tasks/${task.id}/edit`)
+    }
 
-    const removeTask = () => {}
+    const removeTask = () => mutate(task.id)
 
     return (
         <>
@@ -44,7 +54,7 @@ export const TodosListItemActions = ({ task }: TodosListItemActionsProps) => {
             <Menu
                 id={`${task.id}-action-menu`}
                 anchorEl={anchorEl}
-                open={open}
+                open={!isPending && open}
                 onClose={handleClose}
                 slotProps={{
                     list: {

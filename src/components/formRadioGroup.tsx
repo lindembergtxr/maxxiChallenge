@@ -17,6 +17,7 @@ type FormRadioGroupProps = {
     name: string
     required?: boolean
     radioList: { value: string; label: string }[]
+    disabled?: boolean
     error: boolean
     errorMessage: string | undefined
 }
@@ -24,8 +25,9 @@ export const FormRadioGroup = ({
     id,
     name,
     label,
-    error,
+    disabled,
     radioList,
+    error,
     errorMessage,
 }: FormRadioGroupProps) => {
     const { control } = useFormContext()
@@ -52,6 +54,7 @@ export const FormRadioGroup = ({
                                 label={t(radio.label)}
                                 control={<Radio size="small" />}
                                 slotProps={{ typography: { variant: 'caption' } }}
+                                disabled={disabled}
                                 sx={{
                                     alignItems: 'center',
                                     '& .MuiTypography-root': { lineHeight: 1 },

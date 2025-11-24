@@ -36,6 +36,14 @@ export const handlers = [
             limit,
         })
     }),
+    http.get('/todos/:id', async ({ params }) => {
+        const id = params.id as string
+        const index = todoList.findIndex((t) => t.id === id)
+
+        if (index === -1) return HttpResponse.json({ message: 'Not found' }, { status: 404 })
+
+        return HttpResponse.json({ data: todoList[index] }, { status: 200 })
+    }),
     http.post('/todos', async ({ request }) => {
         const body = (await request.json()) as Omit<Task, 'id'>
 

@@ -46,5 +46,7 @@
     "formCoordinateMap": "Clique para selecionar as coordenadas no mapa",
     "formSubmit": "Salvar alterações",
     "todoListPageTitle": "Lista de tarefas",
-    "todoListPageButton": "Adicionar tarefa"
+    "todoListPageButton": "Adicionar tarefa",
+    "todoDetailsPageTitle": "Tarefa",
+    "todoEditPageTitle": "Editar tarefa"
 }
