@@ -16,3 +16,5 @@ export type Task = {
     location: GeoPoint
     dueDate: string | null // ISO 8601 ou null
 }
+
+export type TaskForm = Omit<Task, 'id'> & { id?: string }
